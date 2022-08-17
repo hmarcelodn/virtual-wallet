@@ -1,10 +1,10 @@
 import { Service } from 'typedi';
-import { User } from '../entity/user';
-import { AppDataSource } from '../shared/data/config/data-source';
+import { User } from '../entity';
+import { AppDataSource } from '../shared/data/config';
 
 @Service()
 export class UserRepository {
-  constructor(private readonly userRepository = AppDataSource.getRepository(User)) {}
+  constructor(protected readonly userRepository = AppDataSource.getRepository(User)) {}
 
   findByEmail = (email: string): Promise<User | null> => {
     return this.userRepository.findOne({ where: { email } });

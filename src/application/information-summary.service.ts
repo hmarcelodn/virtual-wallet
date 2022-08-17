@@ -1,9 +1,9 @@
 import { Service } from 'typedi';
-import { TransactionService } from '../domain/transaction.service';
-import { PaymentType } from '../entity/transaction';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { SummaryInputDto } from '../model/summary-input.dto';
-import { UserRepository } from '../repository/user.repository';
+import { TransactionService } from '../domain';
+import { PaymentType } from '../entity';
+import { UserNotFoundError } from '../errors';
+import { SummaryInputDto } from '../model';
+import { UserRepository } from '../repository';
 import { ExchangeRateService } from './exchange-rate.service';
 
 @Service()

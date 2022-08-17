@@ -1,10 +1,8 @@
 import { Service } from 'typedi';
-import { PaymentType } from '../entity/transaction';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { ForecastInputDto } from '../model/forecast-input.dto';
-import { ForecastResponseDto } from '../model/forecast-response.dto';
-import { TransactionRepository } from '../repository/transaction.repository';
-import { UserRepository } from '../repository/user.repository';
+import { PaymentType } from '../entity';
+import { UserNotFoundError } from '../errors';
+import { ForecastInputDto, ForecastResponseDto } from '../model';
+import { TransactionRepository, UserRepository } from '../repository';
 import { ExchangeRateService } from './exchange-rate.service';
 
 @Service()

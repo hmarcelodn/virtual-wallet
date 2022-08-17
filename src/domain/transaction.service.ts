@@ -1,7 +1,6 @@
 import { Service } from 'typedi';
-import { PaymentType, Transaction } from '../entity/transaction';
-import { User } from '../entity/user';
-import { TransactionRepository } from '../repository/transaction.repository';
+import { PaymentType, Transaction, User } from '../entity';
+import { TransactionRepository } from '../repository';
 
 @Service()
 export class TransactionService {

@@ -2,10 +2,9 @@ import PasswordValidator from 'password-validator';
 import { Service } from 'typedi';
 import * as CryptoJS from 'crypto-js';
 import { User } from '../entity/user';
-import { PasswordPolicyError } from '../errors/password-policy.error';
-import { UserExistingError } from '../errors/user-existing.error';
-import { UserSignupDto } from '../model/user-signup.dto';
-import { UserRepository } from '../repository/user.repository';
+import { PasswordPolicyError, UserExistingError } from '../errors';
+import { UserSignupDto } from '../model';
+import { UserRepository } from '../repository';
 import { GENERAL } from '../shared/constants';
 
 @Service()

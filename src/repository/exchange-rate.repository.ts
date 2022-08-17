@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { MoreThan } from 'typeorm';
-import { ExchangeRate } from '../entity/exchange-rate';
-import { AppDataSource } from '../shared/data/config/data-source';
+import { ExchangeRate } from '../entity';
+import { AppDataSource } from '../shared/data/config';
 
 @Service()
 export class ExchangeRateRepository {

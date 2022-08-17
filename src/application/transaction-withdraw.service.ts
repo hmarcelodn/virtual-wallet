@@ -1,10 +1,8 @@
 import { Service } from 'typedi';
-import { TransactionService } from '../domain/transaction.service';
-import { PaymentType, Transaction } from '../entity/transaction';
-import { OutOfBalanceError } from '../errors/out-of-balance.error';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { TransactionRepository } from '../repository/transaction.repository';
-import { UserRepository } from '../repository/user.repository';
+import { TransactionService } from '../domain';
+import { PaymentType, Transaction } from '../entity';
+import { OutOfBalanceError, UserNotFoundError } from '../errors';
+import { TransactionRepository, UserRepository } from '../repository';
 
 @Service()
 export class TransactionWithdrawService {

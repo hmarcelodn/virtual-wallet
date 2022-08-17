@@ -1,13 +1,12 @@
 import { Service } from 'typedi';
 import { LessThan, MoreThan } from 'typeorm';
-import { PaymentType, Transaction } from '../entity/transaction';
-import { User } from '../entity/user';
-import { ForecastProjectionResultDto } from '../model/forecast-projection-result.dto';
-import { AppDataSource } from '../shared/data/config/data-source';
+import { PaymentType, Transaction, User } from '../entity';
+import { ForecastProjectionResultDto } from '../model';
+import { AppDataSource } from '../shared/data/config';
 
 @Service()
 export class TransactionRepository {
-  constructor(private readonly transactionRepository = AppDataSource.getRepository(Transaction)) {}
+  constructor(protected readonly transactionRepository = AppDataSource.getRepository(Transaction)) {}
 
   getTransactionsByUserId(user: User): Promise<Array<Transaction>> {
     return this.transactionRepository.find({ where: { user } });

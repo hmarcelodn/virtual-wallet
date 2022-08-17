@@ -2,15 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import { query } from 'express-validator';
 import { Service } from 'typedi';
 import url from 'url';
-import { InformationBalanceService } from '../application/information-balance.service';
-import { InformationForecastService } from '../application/information-forecast.service';
-import { InformationSeriesService } from '../application/information-series.service';
-import { InformationSummaryService } from '../application/information-summary.service';
+import { InformationBalanceService, InformationForecastService, InformationSeriesService, InformationSummaryService } from '../application';
 import { authorize } from '../middlewares/authorize.middleware';
 import { validateRequest } from '../middlewares/validation-request.middleware';
-import { ForecastInputDto } from '../model/forecast-input.dto';
-import { SeriesInputDto } from '../model/series-input.dto';
-import { SummaryInputDto } from '../model/summary-input.dto';
+import { ForecastInputDto, SeriesInputDto, SummaryInputDto } from '../model';
 import { BaseController } from './base';
 
 @Service()

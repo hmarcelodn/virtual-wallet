@@ -1,8 +1,7 @@
 import { Service } from 'typedi';
-import { PaymentType, Transaction } from '../entity/transaction';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { TransactionRepository } from '../repository/transaction.repository';
-import { UserRepository } from '../repository/user.repository';
+import { PaymentType, Transaction } from '../entity';
+import { UserNotFoundError } from '../errors';
+import { TransactionRepository, UserRepository } from '../repository';
 
 @Service()
 export class TransactionFillService {

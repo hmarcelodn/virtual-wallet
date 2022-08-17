@@ -1,12 +1,11 @@
 import { Service } from 'typedi';
 import * as _ from 'lodash';
-import { TransactionService } from '../domain/transaction.service';
-import { PaymentType, Transaction } from '../entity/transaction';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { UserRepository } from '../repository/user.repository';
+import { TransactionService } from '../domain';
+import { PaymentType, Transaction } from '../entity';
+import { UserNotFoundError } from '../errors';
+import { UserRepository } from '../repository';
 import { ExchangeRateService } from './exchange-rate.service';
-import { SeriesResultResponseDto } from '../model/series-result-response.dto';
-import { SeriesInputDto } from '../model/series-input.dto';
+import { SeriesResultResponseDto, SeriesInputDto } from '../model';
 
 @Service()
 export class InformationSeriesService {

@@ -3,10 +3,9 @@ import * as CryptoJS from 'crypto-js';
 import * as jwt from 'jsonwebtoken';
 
 import { GENERAL } from '../shared/constants';
-import { UserLoginDto } from '../model/user-login.dto';
-import { TokenResponseDto } from '../model/token-response.dto';
-import { UserRepository } from '../repository/user.repository';
-import { InvalidUsernamePasswordError } from '../errors/user-invalid-username-password.error';
+import { UserLoginDto, TokenResponseDto } from '../model';
+import { UserRepository } from '../repository';
+import { InvalidUsernamePasswordError } from '../errors';
 
 @Service()
 export class UserLoginService {

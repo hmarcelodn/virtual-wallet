@@ -8,8 +8,6 @@ import { InformationController } from './controllers/information.controller';
 import { HomeController } from './controllers/home.controller';
 import { AppDataSource } from './shared/data/config/data-source';
 
-console.log(process.env.TYPEORM_HOST);
-
 const app = new App(Number(process.env.PORT) || 3000, [
   Container.get(UserController),
   Container.get(TransactionController),

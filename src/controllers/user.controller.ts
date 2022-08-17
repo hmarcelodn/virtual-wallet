@@ -3,9 +3,7 @@ import { Service } from 'typedi';
 import { body, header } from 'express-validator';
 
 import { BaseController } from './base';
-import { UserLoginService } from '../application/user-login.service';
-import { UserSignupService } from '../application/user-signup.service';
-import { UserLogoutService } from '../application/user-logout.service';
+import { UserLoginService, UserSignupService, UserLogoutService } from '../application';
 import { validateRequest } from '../middlewares/validation-request.middleware';
 
 @Service()

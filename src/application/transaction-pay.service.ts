@@ -1,12 +1,9 @@
 import { Service } from 'typedi';
-import { TransactionService } from '../domain/transaction.service';
-import { PaymentType, Transaction } from '../entity/transaction';
-import { OutOfBalanceError } from '../errors/out-of-balance.error';
-import { SelfPaymentError } from '../errors/self-payment.error';
-import { UserDestinationError } from '../errors/user-destination.error';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { UserRepository } from '../repository/user.repository';
-import { AppDataSource } from '../shared/data/config/data-source';
+import { TransactionService } from '../domain';
+import { PaymentType, Transaction } from '../entity';
+import { OutOfBalanceError, SelfPaymentError, UserDestinationError, UserNotFoundError } from '../errors';
+import { UserRepository } from '../repository';
+import { AppDataSource } from '../shared/data/config';
 
 @Service()
 export class TransactionPayService {

@@ -5,9 +5,7 @@ import { body, header } from 'express-validator';
 import { BaseController } from './base';
 import { authorize } from '../middlewares/authorize.middleware';
 import { validateRequest } from '../middlewares/validation-request.middleware';
-import { TransactionFillService } from '../application/transaction-fill.service';
-import { TransactionWithdrawService } from '../application/transaction-withdraw.service';
-import { TransactionPayService } from '../application/transaction-pay.service';
+import { TransactionFillService, TransactionWithdrawService, TransactionPayService } from '../application';
 
 @Service()
 export class TransactionController extends BaseController {

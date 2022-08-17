@@ -1,8 +1,8 @@
 import { Service } from 'typedi';
-import { TransactionService } from '../domain/transaction.service';
-import { UserNotFoundError } from '../errors/user-not-found.error';
-import { GENERAL } from '../shared/constants/constants';
-import { UserRepository } from '../repository/user.repository';
+import { TransactionService } from '../domain';
+import { UserNotFoundError } from '../errors';
+import { GENERAL } from '../shared/constants';
+import { UserRepository } from '../repository';
 import { ExchangeRateService } from './exchange-rate.service';
 
 @Service()
