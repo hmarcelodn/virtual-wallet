@@ -34,9 +34,7 @@ export class TransactionService {
     const receivedTotal = paymentReceivedTrx.reduce(this.transactionReducer, 0);
     const withdrawTotal = paymentWithdrawTrx.reduce(this.transactionReducer, 0);
 
-    const totalBalance = fillTotal - withdrawTotal - madeTotal + receivedTotal;
-
-    return totalBalance;
+    return fillTotal - withdrawTotal - madeTotal + receivedTotal;
   };
 
   getTransactionsAmountByPeriod = async (
