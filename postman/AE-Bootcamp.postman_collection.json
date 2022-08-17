@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "7e186515-6554-4954-9ffe-20857934e481",
+		"name": "AgileEngine Bootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User:Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"first_name\": \"Steve\",\n    \"last_name\": \"Jobs\",\n    \"id\": \"33996336\",\n    \"birth_date\": \"1988-08-26\",\n    \"email\": \"steve.jobs@agileengine.com\",\n    \"password\": \"Marcelo1988!\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User:Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"hugo.marcelo@agileengine.com\",\n    \"password\": \"test\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User:Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28uZGVsbmVncm9AYWdpbGVlbmdpbmUuY29tIiwidXVpZCI6MywiZmlyc3ROYW1lIjoiTWFyY2VsbyIsImxhc3ROYW1lIjoiRGVsIE5lZ3JvIiwiaWQiOiIzMzk5NjMzNCIsImlhdCI6MTYzMzAxNDE5MSwiZXhwIjoxNjMzMzAyMTkxfQ.5XgeAEv3cvFgtsewESyqNHgLwnYxXGkk6K2nYZ2Ztag",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/user/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions:Fill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzMTAyOTY5LCJleHAiOjE2MzMxMDM4Njl9.qefzaTlZSI3xCKQfYoa8cYM6kEENr6CHdjXrDxrhsrA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/fill",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"fill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions:Withdrawal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzMTAyOTY5LCJleHAiOjE2MzMxMDM4Njl9.qefzaTlZSI3xCKQfYoa8cYM6kEENr6CHdjXrDxrhsrA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/withdraw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"withdraw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction:Pay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzMTIwNTUyLCJleHAiOjE2MzMxMjE0NTJ9.XGToZAD98mY_Gb-Oe_wGhYuOmNYuABW4yGxMfVe7x9o",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": 500,\n    \"email\": \"steve.jobs@agileengine.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Information:Balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzMTIxNDcwLCJleHAiOjE2MzMxMjIzNzB9.T1yy3k_pcQd3lHm7H-KHCrpjvXNMy3MbZ9wqUX5oR58",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/information/balance?currency=USD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"information",
+						"balance"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CurrencyLayer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.currencylayer.com/live?access_key=c651b82abba16d81e83cc550e0b3eb33&format=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"currencylayer",
+						"com"
+					],
+					"path": [
+						"live"
+					],
+					"query": [
+						{
+							"key": "access_key",
+							"value": "c651b82abba16d81e83cc550e0b3eb33"
+						},
+						{
+							"key": "format",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Information:Summary",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzMTIxNDcwLCJleHAiOjE2MzMxMjIzNzB9.T1yy3k_pcQd3lHm7H-KHCrpjvXNMy3MbZ9wqUX5oR58",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/information/summary?currency=USD&start_date=2021-08-01&end_date=2021-10-15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"information",
+						"summary"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						},
+						{
+							"key": "start_date",
+							"value": "2021-08-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2021-10-15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Information:Series",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzMTIxNDcwLCJleHAiOjE2MzMxMjIzNzB9.T1yy3k_pcQd3lHm7H-KHCrpjvXNMy3MbZ9wqUX5oR58",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/information/series?currency=USD&start_date=2021-08-01&end_date=2021-10-15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"information",
+						"series"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						},
+						{
+							"key": "start_date",
+							"value": "2021-08-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2021-10-15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Information:Forecast",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1Z28ubWFyY2Vsb0BhZ2lsZWVuZ2luZS5jb20iLCJ1dWlkIjoxLCJmaXJzdE5hbWUiOiJNYXJjZWxvIiwibGFzdE5hbWUiOiJEZWwgTmVncm8iLCJpZCI6IjMzOTk2MzM0IiwiaWF0IjoxNjMzNDcwMTE2LCJleHAiOjE2MzM0NzEwMTZ9.b95qQVwVl0z6qjyMlgB67zAzRyV6KRuwCCjBThPnwPQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/information/forecast?currency=USD&days=3&type=payment_made",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"information",
+						"forecast"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						},
+						{
+							"key": "days",
+							"value": "3"
+						},
+						{
+							"key": "type",
+							"value": "payment_made"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
