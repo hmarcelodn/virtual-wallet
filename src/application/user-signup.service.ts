@@ -6,7 +6,7 @@ import { PasswordPolicyError } from '../errors/password-policy.error';
 import { UserExistingError } from '../errors/user-existing.error';
 import { UserSignupDto } from '../model/user-signup.dto';
 import { UserRepository } from '../repository/user.repository';
-import { GENERAL } from '../infrastructure/constants';
+import { GENERAL } from '../shared/constants';
 
 @Service()
 export class UserSignupService {

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import Container from 'typedi';
 
-import { GENERAL } from '../infrastructure/constants';
+import { GENERAL } from '../shared/constants/constants';
 import { NotAuthorizedError } from '../errors/not-authorized.error';
 import { TokenBlackListRepository } from '../repository/token-black-list.repository';
-import Container from 'typedi';
 
 interface UserPayload {
   id: string;

@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { TransactionService } from '../domain/transaction.service';
 import { UserNotFoundError } from '../errors/user-not-found.error';
-import { GENERAL } from '../infrastructure/constants';
+import { GENERAL } from '../shared/constants/constants';
 import { UserRepository } from '../repository/user.repository';
 import { ExchangeRateService } from './exchange-rate.service';
 

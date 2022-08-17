@@ -1,10 +1,10 @@
 import axios from 'axios';
+import { Service } from 'typedi';
 import { ExchangeRateRepository } from '../repository/exchange-rate.repository';
 import { ExchangeRateResponseDto } from '../model/exchange-rate-response.dto';
 import { ExchangeRate } from '../entity/exchange-rate';
-import { Service } from 'typedi';
 import { ExchangeRateNotFoundError } from '../errors/exchange-rate-not-found.error';
-import { GENERAL } from '../infrastructure/constants';
+import { GENERAL } from '../shared/constants/constants';
 import { AppDataSource } from '../shared/data/config/data-source';
 
 @Service()

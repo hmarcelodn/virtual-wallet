@@ -2,7 +2,7 @@ import { Service } from 'typedi';
 import * as CryptoJS from 'crypto-js';
 import * as jwt from 'jsonwebtoken';
 
-import { GENERAL } from '../infrastructure/constants';
+import { GENERAL } from '../shared/constants';
 import { UserLoginDto } from '../model/user-login.dto';
 import { TokenResponseDto } from '../model/token-response.dto';
 import { UserRepository } from '../repository/user.repository';
