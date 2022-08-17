@@ -6,7 +6,9 @@ import { AppDataSource } from '../shared/data/config';
 
 @Service()
 export class TransactionRepository {
-  constructor(protected readonly transactionRepository = AppDataSource.getRepository(Transaction)) {}
+  constructor(
+    protected readonly transactionRepository = AppDataSource.getRepository(Transaction),
+  ) {}
 
   getTransactionsByUserId(user: User): Promise<Array<Transaction>> {
     return this.transactionRepository.find({ where: { user } });

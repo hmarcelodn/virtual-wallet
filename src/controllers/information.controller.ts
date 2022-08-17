@@ -2,7 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import { query } from 'express-validator';
 import { Service } from 'typedi';
 import url from 'url';
-import { InformationBalanceService, InformationForecastService, InformationSeriesService, InformationSummaryService } from '../application';
+import {
+  InformationBalanceService,
+  InformationForecastService,
+  InformationSeriesService,
+  InformationSummaryService,
+} from '../application';
 import { authorize } from '../middlewares/authorize.middleware';
 import { validateRequest } from '../middlewares/validation-request.middleware';
 import { ForecastInputDto, SeriesInputDto, SummaryInputDto } from '../model';

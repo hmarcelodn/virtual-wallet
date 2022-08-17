@@ -1,7 +1,12 @@
 import { Service } from 'typedi';
 import { TransactionService } from '../domain';
 import { PaymentType, Transaction } from '../entity';
-import { OutOfBalanceError, SelfPaymentError, UserDestinationError, UserNotFoundError } from '../errors';
+import {
+  OutOfBalanceError,
+  SelfPaymentError,
+  UserDestinationError,
+  UserNotFoundError,
+} from '../errors';
 import { UserRepository } from '../repository';
 import { AppDataSource } from '../shared/data/config';
 

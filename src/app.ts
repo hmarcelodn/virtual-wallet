@@ -3,8 +3,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Application } from 'express';
 import path from 'path';
-import { BaseController } from './controllers/base';
-import { errorHandler } from './middlewares/error-handler.middleware';
+import { BaseController } from './controllers';
+import { errorHandler } from './middlewares';
 
 export class App {
   public app: Application;
