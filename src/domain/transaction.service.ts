@@ -1,31 +1,30 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import { PaymentType, Transaction } from '../entity/transaction';
 import { User } from '../entity/user';
 import { TransactionRepository } from '../repository/transaction.repository';
 
 @Service()
 export class TransactionService {
+  constructor(protected readonly transactionRepository: TransactionRepository) {}
+
   protected transactionReducer = (acc: number, current: Transaction) => {
-    return acc + current.value;
+    return acc + Number(current.value);
   };
 
   getBalance = async (user: User): Promise<number> => {
-    const transactionRepository = getCustomRepository(TransactionRepository);
-
-    const paymentFillTrx = await transactionRepository.getPaymentTransactions(
+    const paymentFillTrx = await this.transactionRepository.getPaymentTransactions(
       user,
       PaymentType.PAYMENT_FILL,
     );
-    const paymentMadeTrx = await transactionRepository.getPaymentTransactions(
+    const paymentMadeTrx = await this.transactionRepository.getPaymentTransactions(
       user,
       PaymentType.PAYMENT_MADE,
     );
-    const paymentReceivedTrx = await transactionRepository.getPaymentTransactions(
+    const paymentReceivedTrx = await this.transactionRepository.getPaymentTransactions(
       user,
       PaymentType.PAYMENT_RECEIVED,
     );
-    const paymentWithdrawTrx = await transactionRepository.getPaymentTransactions(
+    const paymentWithdrawTrx = await this.transactionRepository.getPaymentTransactions(
       user,
       PaymentType.PAYMENT_WITHDRAW,
     );
@@ -51,7 +50,6 @@ export class TransactionService {
   };
 
   getTransactionsByPeriod = (user: User, startDate: Date, endDate: Date, type: PaymentType) => {
-    const transactionRepository = getCustomRepository(TransactionRepository);
-    return transactionRepository.getTransactionsByPeriod(user, startDate, endDate, type);
+    return this.transactionRepository.getTransactionsByPeriod(user, startDate, endDate, type);
   };
 }

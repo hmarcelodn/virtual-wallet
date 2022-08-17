@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import * as _ from 'lodash';
 import { TransactionService } from '../domain/transaction.service';
 import { PaymentType, Transaction } from '../entity/transaction';
@@ -14,14 +13,14 @@ export class InformationSeriesService {
   constructor(
     protected readonly exchangeRateService: ExchangeRateService,
     protected readonly transactionService: TransactionService,
+    protected readonly userRepository: UserRepository,
   ) {}
 
   series = async (
     userId: number,
     seriesInput: SeriesInputDto,
   ): Promise<SeriesResultResponseDto> => {
-    const userRepository = getCustomRepository(UserRepository);
-    const user = await userRepository.findOne({ id: userId });
+    const user = await this.userRepository.findById(userId);
     const exchangeRate = await this.exchangeRateService.getExchangeRate(seriesInput.currency);
 
     if (!user) {

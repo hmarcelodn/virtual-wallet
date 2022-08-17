@@ -24,12 +24,6 @@ export class Transaction {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
   @Column({
     type: 'enum',
     enum: ['payment_received', 'payment_made', 'payment_withdraw', 'payment_fill'],

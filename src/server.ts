@@ -3,12 +3,12 @@ import 'express-async-errors';
 import Container from 'typedi';
 import { App } from './app';
 import { UserController } from './controllers/user.controller';
-import { PostgresClient } from './infrastructure/postgres-client.wrapper';
 import { TransactionController } from './controllers/transaction.controller';
 import { InformationController } from './controllers/information.controller';
 import { HomeController } from './controllers/home.controller';
+import { AppDataSource } from './shared/data/config/data-source';
 
-const postgresClient = Container.get(PostgresClient);
+console.log(process.env.TYPEORM_HOST);
 
 const app = new App(Number(process.env.PORT) || 3000, [
   Container.get(UserController),
@@ -17,7 +17,8 @@ const app = new App(Number(process.env.PORT) || 3000, [
   Container.get(HomeController),
 ]);
 
-(async () => await postgresClient.connect())();
+(async () => await AppDataSource.initialize())();
+
 (() => {
   app.listen();
 })();

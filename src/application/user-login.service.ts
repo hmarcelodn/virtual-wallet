@@ -1,4 +1,3 @@
-import { getCustomRepository } from 'typeorm';
 import { Service } from 'typedi';
 import * as CryptoJS from 'crypto-js';
 import * as jwt from 'jsonwebtoken';
@@ -11,9 +10,10 @@ import { InvalidUsernamePasswordError } from '../errors/user-invalid-username-pa
 
 @Service()
 export class UserLoginService {
+  constructor(protected readonly userRepository: UserRepository) {}
+
   login = async (model: UserLoginDto): Promise<TokenResponseDto> => {
-    const userRepository = getCustomRepository(UserRepository);
-    const user = await userRepository.findByEmail(model.email);
+    const user = await this.userRepository.findByEmail(model.email);
 
     if (!user) {
       throw new InvalidUsernamePasswordError();

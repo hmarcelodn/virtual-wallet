@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import { TransactionService } from '../domain/transaction.service';
 import { PaymentType } from '../entity/transaction';
 import { UserNotFoundError } from '../errors/user-not-found.error';
@@ -12,12 +11,11 @@ export class InformationSummaryService {
   constructor(
     protected readonly transactionService: TransactionService,
     protected readonly exchangeRateService: ExchangeRateService,
+    protected readonly userRepository: UserRepository,
   ) {}
 
   summary = async (userId: number, summaryInput: SummaryInputDto) => {
-    const userRepository = getCustomRepository(UserRepository);
-
-    const user = await userRepository.findOne({ id: userId });
+    const user = await this.userRepository.findById(userId);
 
     if (!user) {
       throw new UserNotFoundError();

@@ -1,16 +1,20 @@
-import { EntityRepository, LessThan, MoreThan, Repository } from 'typeorm';
+import { Service } from 'typedi';
+import { LessThan, MoreThan } from 'typeorm';
 import { PaymentType, Transaction } from '../entity/transaction';
 import { User } from '../entity/user';
 import { ForecastProjectionResultDto } from '../model/forecast-projection-result.dto';
+import { AppDataSource } from '../shared/data/config/data-source';
 
-@EntityRepository(Transaction)
-export class TransactionRepository extends Repository<Transaction> {
+@Service()
+export class TransactionRepository {
+  constructor(private readonly transactionRepository = AppDataSource.getRepository(Transaction)) {}
+
   getTransactionsByUserId(user: User): Promise<Array<Transaction>> {
-    return this.find({ user });
+    return this.transactionRepository.find({ where: { user } });
   }
 
   getPaymentTransactions = (user: User, type: PaymentType) => {
-    return this.find({ user, type });
+    return this.transactionRepository.find({ where: { user, type } });
   };
 
   getTransactionsByPeriod = (
@@ -19,7 +23,7 @@ export class TransactionRepository extends Repository<Transaction> {
     endDate: Date,
     type: PaymentType,
   ): Promise<Transaction[]> => {
-    return this.find({
+    return this.transactionRepository.find({
       where: {
         user: user,
         date: MoreThan(startDate) && LessThan(endDate),
@@ -37,7 +41,7 @@ export class TransactionRepository extends Repository<Transaction> {
     nDaysBefore.setHours(0, 0, 0, 0);
     nDaysBefore.setDate(nDaysBefore.getDate() - days);
 
-    return this.query(
+    return this.transactionRepository.query(
       `
             select substring(cast(date as varchar) from 1 for 10) as date, SUM(value) as amount
             from public.transaction
@@ -46,5 +50,9 @@ export class TransactionRepository extends Repository<Transaction> {
         `,
       [type],
     );
+  };
+
+  save = (transaction: Transaction): Promise<Transaction | null> => {
+    return this.transactionRepository.save(transaction);
   };
 }

@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository, getManager } from 'typeorm';
 import { TransactionService } from '../domain/transaction.service';
 import { PaymentType, Transaction } from '../entity/transaction';
 import { OutOfBalanceError } from '../errors/out-of-balance.error';
@@ -7,15 +6,17 @@ import { SelfPaymentError } from '../errors/self-payment.error';
 import { UserDestinationError } from '../errors/user-destination.error';
 import { UserNotFoundError } from '../errors/user-not-found.error';
 import { UserRepository } from '../repository/user.repository';
+import { AppDataSource } from '../shared/data/config/data-source';
 
 @Service()
 export class TransactionPayService {
-  constructor(protected readonly transactionService: TransactionService) {}
+  constructor(
+    protected readonly transactionService: TransactionService,
+    protected readonly userRepository: UserRepository,
+  ) {}
 
   pay = async (value: number, srcUserId: number, destUserEmail: string): Promise<void> => {
-    const userRepository = getCustomRepository(UserRepository);
-
-    const srcUser = await userRepository.findOne({ id: srcUserId });
+    const srcUser = await this.userRepository.findById(srcUserId);
     if (!srcUser) {
       throw new UserNotFoundError();
     }
@@ -24,7 +25,7 @@ export class TransactionPayService {
       throw new SelfPaymentError();
     }
 
-    const destUser = await userRepository.findByEmail(destUserEmail);
+    const destUser = await this.userRepository.findByEmail(destUserEmail);
     if (!destUser) {
       throw new UserDestinationError();
     }
@@ -45,7 +46,7 @@ export class TransactionPayService {
     destTrx.user = destUser;
     destTrx.value = value;
 
-    await getManager().transaction(async (transactionEntityManager) => {
+    await AppDataSource.transaction(async (transactionEntityManager) => {
       await transactionEntityManager.save(srcTrx);
       await transactionEntityManager.save(destTrx);
     });

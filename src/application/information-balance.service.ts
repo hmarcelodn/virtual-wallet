@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import { TransactionService } from '../domain/transaction.service';
 import { UserNotFoundError } from '../errors/user-not-found.error';
 import { GENERAL } from '../infrastructure/constants';
@@ -11,11 +10,11 @@ export class InformationBalanceService {
   constructor(
     protected readonly transactionService: TransactionService,
     protected readonly exchangeRateService: ExchangeRateService,
+    protected readonly userRepository: UserRepository,
   ) {}
 
   getBalance = async (userId: number, currency: string): Promise<number> => {
-    const userRepository = getCustomRepository(UserRepository);
-    const user = await userRepository.findOne({ id: userId });
+    const user = await this.userRepository.findById(userId);
 
     if (!user) {
       throw new UserNotFoundError();

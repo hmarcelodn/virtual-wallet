@@ -1,21 +1,27 @@
-import { EntityRepository, MoreThan, Repository } from 'typeorm';
+import { Service } from 'typedi';
+import { MoreThan } from 'typeorm';
 import { ExchangeRate } from '../entity/exchange-rate';
+import { AppDataSource } from '../shared/data/config/data-source';
 
-@EntityRepository(ExchangeRate)
-export class ExchangeRateRepository extends Repository<ExchangeRate> {
+@Service()
+export class ExchangeRateRepository {
+  constructor(
+    private readonly exchangeRateRepository = AppDataSource.getRepository(ExchangeRate),
+  ) {}
+
   getTodayRates = (): Promise<number> => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    return this.count({
+    return this.exchangeRateRepository.count({
       where: {
         date: MoreThan(today),
       },
     });
   };
 
-  getConversionRate = (from: string, to: string): Promise<ExchangeRate | undefined> => {
-    return this.findOne({
+  getConversionRate = (from: string, to: string): Promise<ExchangeRate | null> => {
+    return this.exchangeRateRepository.findOne({
       where: {
         quote: `${from}${to}`,
       },

@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { getConnection, getCustomRepository } from 'typeorm';
 import { ExchangeRateRepository } from '../repository/exchange-rate.repository';
 import { ExchangeRateResponseDto } from '../model/exchange-rate-response.dto';
 import { ExchangeRate } from '../entity/exchange-rate';
 import { Service } from 'typedi';
 import { ExchangeRateNotFoundError } from '../errors/exchange-rate-not-found.error';
 import { GENERAL } from '../infrastructure/constants';
+import { AppDataSource } from '../shared/data/config/data-source';
 
 @Service()
 export class ExchangeRateService {
+  constructor(protected readonly exchangeRateRepository: ExchangeRateRepository) {}
+
   sync = async () => {
-    const exchangeRateRepository = getCustomRepository(ExchangeRateRepository);
-    const todayRates = await exchangeRateRepository.getTodayRates();
+    const todayRates = await this.exchangeRateRepository.getTodayRates();
 
     if (todayRates > 0) {
       return;
@@ -35,8 +36,7 @@ export class ExchangeRateService {
       newExchangeRates.push(newExchangeRate);
     }
 
-    await getConnection()
-      .createQueryBuilder()
+    await AppDataSource.createQueryBuilder()
       .insert()
       .into(ExchangeRate)
       .values(newExchangeRates)
@@ -45,8 +45,7 @@ export class ExchangeRateService {
 
   convert = async (amount: number, currency: string) => {
     await this.sync();
-    const exchangeRateRepository = getCustomRepository(ExchangeRateRepository);
-    const exchangeRate = await exchangeRateRepository.getConversionRate(
+    const exchangeRate = await this.exchangeRateRepository.getConversionRate(
       GENERAL.DEFAULT_CURRENCY,
       currency,
     );
@@ -60,8 +59,7 @@ export class ExchangeRateService {
 
   getExchangeRate = async (currency: string): Promise<ExchangeRate> => {
     await this.sync();
-    const exchangeRateRepository = getCustomRepository(ExchangeRateRepository);
-    const exchangeRate = await exchangeRateRepository.getConversionRate(
+    const exchangeRate = await this.exchangeRateRepository.getConversionRate(
       GENERAL.DEFAULT_CURRENCY,
       currency,
     );

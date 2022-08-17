@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import { TransactionService } from '../domain/transaction.service';
 import { PaymentType, Transaction } from '../entity/transaction';
 import { OutOfBalanceError } from '../errors/out-of-balance.error';
@@ -9,13 +8,14 @@ import { UserRepository } from '../repository/user.repository';
 
 @Service()
 export class TransactionWithdrawService {
-  constructor(protected readonly transactionService: TransactionService) {}
+  constructor(
+    protected readonly transactionService: TransactionService,
+    protected readonly transactionRepository: TransactionRepository,
+    protected readonly userRepository: UserRepository,
+  ) {}
 
-  withdraw = async (value: number, userId: number): Promise<Transaction> => {
-    const transactionRepository = getCustomRepository(TransactionRepository);
-    const userRepository = getCustomRepository(UserRepository);
-
-    const user = await userRepository.findOne({ id: userId });
+  withdraw = async (value: number, userId: number): Promise<Transaction | null> => {
+    const user = await this.userRepository.findById(userId);
     if (!user) {
       throw new UserNotFoundError();
     }
@@ -31,6 +31,6 @@ export class TransactionWithdrawService {
     newWithdrawTrx.value = value;
     newWithdrawTrx.type = PaymentType.PAYMENT_WITHDRAW;
 
-    return transactionRepository.save(newWithdrawTrx);
+    return this.transactionRepository.save(newWithdrawTrx);
   };
 }

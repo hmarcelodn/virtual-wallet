@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import { PaymentType } from '../entity/transaction';
 import { UserNotFoundError } from '../errors/user-not-found.error';
 import { ForecastInputDto } from '../model/forecast-input.dto';
@@ -10,20 +9,21 @@ import { ExchangeRateService } from './exchange-rate.service';
 
 @Service()
 export class InformationForecastService {
-  constructor(protected readonly exchangeRateService: ExchangeRateService) {}
+  constructor(
+    protected readonly exchangeRateService: ExchangeRateService,
+    protected readonly transactionRepository = new TransactionRepository(),
+    protected readonly userRepository: UserRepository,
+  ) {}
 
   forecast = async (userId: number, forecastInput: ForecastInputDto) => {
-    const transactionRepository = getCustomRepository(TransactionRepository);
-    const userRepository = getCustomRepository(UserRepository);
-
-    const user = await userRepository.findOne({ id: userId });
+    const user = await this.userRepository.findById(userId);
 
     if (!user) {
       throw new UserNotFoundError();
     }
 
     const exchangeRate = await this.exchangeRateService.getExchangeRate(forecastInput.currency);
-    const lastNDaysTrx = await transactionRepository.getTransactionsByLastNDays(
+    const lastNDaysTrx = await this.transactionRepository.getTransactionsByLastNDays(
       user,
       forecastInput.days,
       forecastInput.type,

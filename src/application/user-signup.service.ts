@@ -1,7 +1,6 @@
 import PasswordValidator from 'password-validator';
 import { Service } from 'typedi';
 import * as CryptoJS from 'crypto-js';
-import { getCustomRepository } from 'typeorm';
 import { User } from '../entity/user';
 import { PasswordPolicyError } from '../errors/password-policy.error';
 import { UserExistingError } from '../errors/user-existing.error';
@@ -11,9 +10,9 @@ import { GENERAL } from '../infrastructure/constants';
 
 @Service()
 export class UserSignupService {
-  signup = async (userSignupInput: UserSignupDto): Promise<User> => {
-    const userRepository = getCustomRepository(UserRepository);
+  constructor(protected readonly userRepository: UserRepository) {}
 
+  signup = async (userSignupInput: UserSignupDto): Promise<User | null> => {
     const schema = new PasswordValidator();
     schema
       .is()
@@ -47,10 +46,12 @@ export class UserSignupService {
     newUser.password = encryptedPassword.toString();
     newUser.userIdentity = userSignupInput.id;
 
-    if (await userRepository.findByEmail(userSignupInput.email)) {
+    if (await this.userRepository.findByEmail(userSignupInput.email)) {
       throw new UserExistingError();
     }
 
-    return userRepository.save(newUser);
+    console.log(newUser);
+
+    return this.userRepository.save(newUser);
   };
 }

@@ -15,12 +15,6 @@ export class ExchangeRate {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
   @Column()
   quote: string;
 

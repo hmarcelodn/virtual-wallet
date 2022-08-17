@@ -1,9 +1,18 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { Service } from 'typedi';
 import { TokenBlackList } from '../entity/token-black-list';
+import { AppDataSource } from '../shared/data/config/data-source';
 
-@EntityRepository(TokenBlackList)
-export class TokenBlackListRepository extends Repository<TokenBlackList> {
-  getToken = (token: string) => {
-    return this.findOne({ token });
+@Service()
+export class TokenBlackListRepository {
+  constructor(
+    private readonly tokenBlackListRepository = AppDataSource.getRepository(TokenBlackList),
+  ) {}
+
+  getToken = (token: string): Promise<TokenBlackList | null> => {
+    return this.tokenBlackListRepository.findOne({ where: { token } });
+  };
+
+  save = (tokenBlackList: TokenBlackList): Promise<TokenBlackList | null> => {
+    return this.tokenBlackListRepository.save(tokenBlackList);
   };
 }

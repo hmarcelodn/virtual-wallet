@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { getCustomRepository } from 'typeorm';
 import jwt from 'jsonwebtoken';
 
 import { GENERAL } from '../infrastructure/constants';
 import { NotAuthorizedError } from '../errors/not-authorized.error';
 import { TokenBlackListRepository } from '../repository/token-black-list.repository';
+import Container from 'typedi';
 
 interface UserPayload {
   id: string;
@@ -23,7 +23,7 @@ declare global {
 }
 
 export const authorize = async (req: Request, res: Response, next: NextFunction) => {
-  const tokenBlackListRepository = getCustomRepository(TokenBlackListRepository);
+  const tokenBlackListRepository = Container.get(TokenBlackListRepository);
 
   if (!req.headers.authorization) {
     throw new NotAuthorizedError();

@@ -1,5 +1,4 @@
 import { Service } from 'typedi';
-import { getCustomRepository } from 'typeorm';
 import { PaymentType, Transaction } from '../entity/transaction';
 import { UserNotFoundError } from '../errors/user-not-found.error';
 import { TransactionRepository } from '../repository/transaction.repository';
@@ -7,11 +6,13 @@ import { UserRepository } from '../repository/user.repository';
 
 @Service()
 export class TransactionFillService {
-  fill = async (value: number, userId: number): Promise<Transaction> => {
-    const userRepository = getCustomRepository(UserRepository);
-    const transactionRepository = getCustomRepository(TransactionRepository);
+  constructor(
+    protected readonly userRepository: UserRepository,
+    protected readonly transactionRepository: TransactionRepository,
+  ) {}
 
-    const user = await userRepository.findOne({ id: userId });
+  fill = async (value: number, userId: number): Promise<Transaction | null> => {
+    const user = await this.userRepository.findById(userId);
 
     if (!user) {
       throw new UserNotFoundError();
@@ -22,6 +23,6 @@ export class TransactionFillService {
     transaction.value = value;
     transaction.user = user;
 
-    return transactionRepository.save(transaction);
+    return this.transactionRepository.save(transaction);
   };
 }
